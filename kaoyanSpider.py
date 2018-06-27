@@ -17,7 +17,7 @@ def get_article(link):
     :return: article
     :rtype: string
     """
-    print(link)
+    global article
     try:
         # requests always get the middle page instead of the target page.
         # while len(html) < 500:
@@ -98,7 +98,9 @@ def get_school_dict(name, link):
     outline = get_specific_info(name, link, types['outline'])
     grades = get_specific_info(name, link, types['grades'])
     rate = get_specific_info(name, link, types['rate'])
-    school_dict = {'name': name, 'Info': info, 'enrolment_regulation': enrolment_regulation,
+    district = get_district(name)
+    school_dict = {'name': name, 'Info': info, 'district': district,
+                   'enrolment_regulation': enrolment_regulation,
                    'major_info': major_info, 'reference_book': reference_book,
                    'outline': outline, 'grades': grades, 'rate': rate
                    }
@@ -159,6 +161,28 @@ def get_specific_info(school, link, type):
             a += 1
             specific_info[title] = article_text
     return specific_info
+
+
+def get_district(d_name):
+    """Get School's District.
+
+    :param d_name: school name
+    :rtype: str
+    """
+    school_map = {'华中地区': {'武汉大学', '华中科技', '中南大学', '河南大学', '湖南大学', '地大武汉', '国防科大',
+                           '中南财经', '湖南师大', '武汉理工', '湘潭大学', '中南民族', '郑州大学', },
+                  '华东地区': {'复旦大学', '南京大学', '厦门大学', '浙江大学', '上海交大', '同济大学', '清华大学',
+                           '华东师大', '山东大学', '华东政法', '华东理工', '石油大学', '中国海洋', '矿大徐州',
+                           '厦门大学'},
+                  '华北地区': {'北京大学', '人民大学', '中科大', '清华大学'},
+                  '其他地区': {'四川大学', '中山大学', '中山大学', '华南理工', '华南师大', '暨南大学', '四川大学',
+                           '电子科大', '西安交大', '重庆大学', '广西师大', '西安电子', '第四军医', '西北大学',
+                           '广西大学'}
+                  }
+    for k, v in school_map.items():
+        if d_name in v:
+            district = k
+    return district
 
 
 hds=[{'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'},\
