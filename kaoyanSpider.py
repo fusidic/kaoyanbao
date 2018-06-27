@@ -154,8 +154,9 @@ def get_specific_info(school, link, type):
     for ul in uls:
         a = 1
         for li in ul.select('li'):
-            time = li.text
+            # time = li.text
             article_link = li.find('a')['href']
+            print(article_link)
             title = li.find('a')['title']
             article_text = get_article(article_link)
             a += 1
@@ -202,8 +203,17 @@ hds=[{'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) 
 
 if __name__ == '__main__':
     school_name_and_link = get_name()
+    except_list = {'武汉大学', '东南大学', '华中师大', '天津大学',
+                   '以上大学页面有问题',
+                   '华南理工', '第四军医', '重庆大学', '山东大学', '华中科技',
+                   '武汉理工', '郑州大学', '四川大学', '石油大学', '华东师大',
+                   '广西师大', '上海交大', '中国海洋', '国防科大', '西安交大'}
     for each_name in school_name_and_link:
+        if each_name in except_list:
+            continue
+        print(each_name + '开始爬取')
         ultra_dict = get_school_dict(each_name, school_name_and_link[each_name])
         filename = (u"./" + each_name + u".json")
         with open(filename, 'w', encoding='utf-8') as json_file:
             json.dump(ultra_dict, json_file, ensure_ascii=False)
+        print(each_name + '完成')
