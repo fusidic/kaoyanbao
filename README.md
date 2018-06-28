@@ -24,7 +24,7 @@
 	"rate": {
 		"title": "sdfasdfasfasfd"
 	},
-	"outline"：{
+	"outline": {
 		"title": "sdfasdfasfasfd"
 	}
 }
