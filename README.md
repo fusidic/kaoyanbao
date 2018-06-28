@@ -21,7 +21,7 @@
 	"grades": {
 		"title": "sdfasdfasfasfd"
 	},
-	"rate"：{
+	"rate": {
 		"title": "sdfasdfasfasfd"
 	},
 	"outline"：{
