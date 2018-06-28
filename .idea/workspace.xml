@@ -2,32 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c2b894b-64f8-4b46-971a-43e04b79e324" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/kaoyanSpider.py" afterPath="$PROJECT_DIR$/kaoyanSpider.py" />
-      <change beforePath="$PROJECT_DIR$/东南大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/中国海洋.json" afterPath="$PROJECT_DIR$/中国海洋.json" />
-      <change beforePath="$PROJECT_DIR$/中山大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/中科大.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/北京大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/华中师大.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/华中科技.json" afterPath="$PROJECT_DIR$/华中科技.json" />
-      <change beforePath="$PROJECT_DIR$/华南师大.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/厦门大学.json" afterPath="$PROJECT_DIR$/厦门大学.json" />
-      <change beforePath="$PROJECT_DIR$/同济大学.json" afterPath="$PROJECT_DIR$/同济大学.json" />
-      <change beforePath="$PROJECT_DIR$/地大武汉.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/复旦大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/天津大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/山东大学.json" afterPath="$PROJECT_DIR$/山东大学.json" />
-      <change beforePath="$PROJECT_DIR$/广西大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/暨南大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/武汉理工.json" afterPath="$PROJECT_DIR$/武汉理工.json" />
-      <change beforePath="$PROJECT_DIR$/河南大学.json" afterPath="$PROJECT_DIR$/河南大学.json" />
-      <change beforePath="$PROJECT_DIR$/湖南师大.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/电子科大.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/矿大徐州.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/第四军医.json" afterPath="$PROJECT_DIR$/第四军医.json" />
-      <change beforePath="$PROJECT_DIR$/西北大学.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/西安电子.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/重庆大学.json" afterPath="$PROJECT_DIR$/重庆大学.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/sqliteWraper.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,14 +18,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="kaoyanSpider.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="kaoyanSpider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kaoyanSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
+            <state relative-caret-position="15">
               <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
               <folding>
                 <element signature="e#42#57#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sqliteWraper.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sqliteWraper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -81,6 +67,8 @@
       <list>
         <option value="$PROJECT_DIR$/spiderT.py" />
         <option value="$PROJECT_DIR$/kaoyanSpider.py" />
+        <option value="$PROJECT_DIR$/venv/sqliteWraper.py" />
+        <option value="$PROJECT_DIR$/sqliteWraper.py" />
       </list>
     </option>
   </component>
@@ -91,7 +79,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
+    <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
   </component>
@@ -111,6 +99,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,14 +112,17 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="SearchEverywhereHistoryKey" value="fontsize&#9;ACTION&#9;EditorIncreaseFontSize" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\shigong\kaoyanbao" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -219,15 +212,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1057" extended-state="0" />
+    <frame x="953" y="0" width="974" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1921824" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20434782" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2519001" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.202407" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25108695" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20678337" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -254,6 +248,16 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/kaoyanSpider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/kaoyanSpider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -371,11 +375,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kaoyanSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
+        <state relative-caret-position="15">
           <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding>
             <element signature="e#42#57#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sqliteWraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
