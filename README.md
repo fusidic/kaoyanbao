@@ -18,7 +18,7 @@
 	"reference_book": {
 		"title": "sdfasdfasfasfd"
 	},
-	"grades"：{
+	"grades": {
 		"title": "sdfasdfasfasfd"
 	},
 	"rate"：{
