@@ -9,9 +9,8 @@
 	'name': "xx大学",
 	'distric': "XX地区",
 	'info': "XX大学是一所由教育部......",
-	'enrolment_regulation": {
-		'title': 'content',
-        'title': 'asdfasdfas'
+	'enrolment_regulation': {
+		'title': 'content'
 	},
 	'major_info': {
 		'title': 'sdfasdfasfasfd'
