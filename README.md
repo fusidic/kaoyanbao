@@ -6,26 +6,26 @@
 
 ```json
 {
-	'name': "xx大学",
-	'distric': "XX地区",
-	'info': "XX大学是一所由教育部......",
-	'enrolment_regulation': {
-		'title': 'content'
+	"name": "XX大学",
+	"distric": "XX地区",
+	"info": "XX大学是一所由教育部......",
+	"enrolment_regulation": {
+		"title": "sdfasdfasfasfd"
 	},
-	'major_info': {
-		'title': 'sdfasdfasfasfd'
+	"major_info": {
+		"title": "sdfasdfasfasfd"
 	},
-	'reference_book': {
-		'title': 'sdfasdfasfasfd'
+	"reference_book": {
+		"title": "sdfasdfasfasfd"
 	},
-	'grades'：{
-		'title': 'sdfasdfasfasfd'
+	"grades"：{
+		"title": "sdfasdfasfasfd"
 	},
-	'rate'：{
-		'title': 'sdfasdfasfasfd'
+	"rate"：{
+		"title": "sdfasdfasfasfd"
 	},
-	'outline'：{
-		'title': 'sdfasdfasfasfd'
+	"outline"：{
+		"title": "sdfasdfasfasfd"
 	}
 }
 ```
