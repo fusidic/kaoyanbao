@@ -112,7 +112,7 @@ def get_school_dict(name, link):
 
 # 重写了一个内容写入的函数，因为数据库和json结构不一样
 def get_content_list(name, link):
-    types = {'outline': 'dagang'}
+    types = {'rate': 'baolubi'}
     # types = {'enrolment_regulation': 'jianzhang', 'major_info': 'zhuanye',
     #          'reference_book': 'shumu', 'outline': 'dagang', 'grades': 'fenshuxian',
     #          'rate': 'baolubi'}
@@ -127,19 +127,22 @@ def get_content_list(name, link):
         part_input_times = 1
         for ul in uls:
             for li in ul.select('li'):
-                # time = li.text
-                article_link = li.find('a')['href']
-                title = li.find('a')['title']
-                article_text = get_article(article_link)
-                info_dict = getDBInfo.get_content_info_dict(school_name, sheet_name, title, article_text)
-                command = mysqlWrapper.gen_content_insert_command(info_dict)
-                t = [school_name, sheet_name, part_input_times, sum_input_times]
-                print('{0[0]}{0[1]}表单第{0[2]}插入开始，总第{0[3]}次'.format(t))
-                print('\n')
-                part_input_times += 1
-                sum_input_times += 1
-                mysqlWrapper.do_content_insert(command)
-                print('--------------------------------success--------------------------------------', '\n')
+                try:
+                    # time = li.text
+                    article_link = li.find('a')['href']
+                    title = li.find('a')['title']
+                    article_text = get_article(article_link)
+                    info_dict = getDBInfo.get_content_info_dict(school_name, sheet_name, title, article_text)
+                    command = mysqlWrapper.gen_content_insert_command(info_dict)
+                    t = [school_name, sheet_name, part_input_times, sum_input_times]
+                    print('{0[0]}{0[1]}表单第{0[2]}插入开始，总第{0[3]}次'.format(t))
+                    print('\n')
+                    part_input_times += 1
+                    sum_input_times += 1
+                    mysqlWrapper.do_content_insert(command)
+                    print('--------------------------------success--------------------------------------', '\n')
+                except Exception:
+                    break
 
 
 def get_info(link):
