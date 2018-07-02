@@ -30,7 +30,7 @@ def get_article(link):
         article_pre = soup.select('body > div.waper > div > div.main > div.article > div.articleCon')
         article = article_pre[0].text
     except:
-        print("Error:")
+        print("Error:", link)
     # time = soup.select('body > div.waper > div > div.main > div.article > div.articleInfo > span:nth-of-type(1)')
     return article
 
@@ -40,10 +40,10 @@ def get_comm():
     """Get users personal experience about 'kaoyan', 'xinlu' and 'jingyan' are included.
 
     :return: comm
-    :rtype: dict
+    :rtype: list
     """
     links = ['http://www.kaoyan.com/beikao/xinlu/', 'http://www.kaoyan.com/beikao/jingyan/']
-    comm = {}
+    comm = []
     for link in links:
         html = requests.get(link, headers=hds[random.randint(0,len(hds)-1)]).content
         soup = BeautifulSoup(html, 'lxml')
@@ -53,7 +53,8 @@ def get_comm():
                 comm_title = li.select('a')[0].text
                 comm_link = li.find('a')['href']
                 comm_essay = get_comm_essay(comm_link)
-                comm[comm_title] = comm_essay
+                comm_dict = {'title': comm_title, 'content': comm_essay}
+                comm.append(comm_dict)
     return comm
 
 
@@ -83,6 +84,20 @@ def get_name(baokao_page="http://www.kaoyan.com/baokao/"):
     return school_info
 
 
+def get_school_logo(baokao_page="http://www.kaoyan.com/baokao/"):
+    logo_list = []
+    html = requests.get(baokao_page, headers=hds[random.randint(0, len(hds) - 1)]).content
+    soup = BeautifulSoup(html, 'lxml')
+    uls = soup.select('div.hotCon > ul')
+    for ul in uls:
+        for li in ul.select('li'):
+            school_name = li.find('a')['title']
+            logo_link = li.find('img')['src']
+            logo_dict = {'school_name': school_name, 'logo_link': logo_link}
+            logo_list.append(logo_dict)
+    return logo_list
+
+
 def get_school_dict(name, link):
     """Wrap whole datas in a dict.
 
@@ -94,7 +109,9 @@ def get_school_dict(name, link):
     types = {'enrolment_regulation': 'jianzhang', 'major_info': 'zhuanye',
              'reference_book': 'shumu', 'outline': 'dagang', 'grades': 'fenshuxian',
              'rate': 'baolubi'}
-    info = get_info(link)
+    school_name = name
+    sid = mysqlWrapper.get_school_key(name)
+    intro = get_info(link)
     enrolment_regulation = get_specific_info(name, link, types['enrolment_regulation'])
     major_info = get_specific_info(name, link, types['major_info'])
     reference_book = get_specific_info(name, link, types['reference_book'])
@@ -102,12 +119,46 @@ def get_school_dict(name, link):
     grades = get_specific_info(name, link, types['grades'])
     rate = get_specific_info(name, link, types['rate'])
     district = get_district(name)
-    school_dict = {'name': name, 'Info': info, 'district': district,
+    site = get_official_link(name, link)
+    school_dict = {'school_name': school_name, 'sid': sid, 'intro': intro, 'district': district, 'site': site,
                    'enrolment_regulation': enrolment_regulation,
                    'major_info': major_info, 'reference_book': reference_book,
                    'outline': outline, 'grades': grades, 'rate': rate
                    }
     return school_dict
+
+
+def get_specific_info(school, link, info_type):
+    """Fetch the 6 parts of informations from school-page.
+
+    Expect three param which indicate 'school name', 'school-page link',
+    and the 'type' of the information you want.
+
+    :param school: school name
+    :param link: school-page link
+    :param info_type: the type of the information
+    :return: specific_info
+    :rtype: list
+    """
+    specific_info = []
+    link = link + info_type + "/"
+    html = requests.get(link, headers=hds[random.randint(0,len(hds)-1)]).content
+    soup = BeautifulSoup(html, 'lxml')
+    uls = soup.select("body > div.waper > div > div.main > ul.subList")
+    for ul in uls:
+        a = 1
+        for li in ul.select('li'):
+            # time = li.text
+            try:
+                article_link = li.find('a')['href']
+                title = li.find('a')['title']
+                article_text = get_article(article_link)
+                info_dict = {'title': title, 'content': article_text}
+                a += 1
+                specific_info.append(info_dict)
+            except Exception:
+                continue
+    return specific_info
 
 
 # 重写了一个内容写入的函数，因为数据库和json结构不一样
@@ -165,36 +216,6 @@ def get_info(link):
     return info
 
 
-def get_specific_info(school, link, info_type):
-    """Fetch the 6 parts of informations from school-page.
-
-    Expect three param which indicate 'school name', 'school-page link',
-    and the 'type' of the information you want.
-
-    :param school: school name
-    :param link: school-page link
-    :param info_type: the type of the information
-    :return: specific_info
-    :rtype: dict
-    """
-    specific_info = {}
-    link = link + info_type + "/"
-    html = requests.get(link, headers=hds[random.randint(0,len(hds)-1)]).content
-    soup = BeautifulSoup(html, 'lxml')
-    uls = soup.select("body > div.waper > div > div.main > ul.subList")
-    for ul in uls:
-        a = 1
-        for li in ul.select('li'):
-            # time = li.text
-            article_link = li.find('a')['href']
-            print(article_link)
-            title = li.find('a')['title']
-            article_text = get_article(article_link)
-            a += 1
-            specific_info[title] = article_text
-    return specific_info
-
-
 def get_district(d_name):
     """Get School's District.
 
@@ -207,7 +228,7 @@ def get_district(d_name):
                            '华东师大', '山东大学', '华东政法', '华东理工', '石油大学', '中国海洋', '矿大徐州',
                            '厦门大学', '东南大学'},
                   '华北地区': {'北京大学', '人民大学', '中科大', '清华大学', '天津大学'},
-                  '其他地区': {'四川大学', '中山大学', '中山大学', '华南理工', '华南师大', '暨南大学', '四川大学',
+                  '其他地区': {'四川大学', '中山大学', '华南理工', '华南师大', '暨南大学', '四川大学',
                            '电子科大', '西安交大', '重庆大学', '广西师大', '西安电子', '第四军医', '西北大学',
                            '广西大学'}
                   }
@@ -249,13 +270,7 @@ hds=[{'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) 
 
 
 if __name__ == '__main__':
-    school_name_and_link = get_name()
-
-    # except_list = {'武汉大学', '东南大学', '华中师大', '天津大学',
-    #                '以上大学页面有问题',
-    #                '华南理工', '第四军医', '重庆大学', '山东大学', '华中科技',
-    #                '武汉理工', '郑州大学', '四川大学', '石油大学', '华东师大',
-    #                '广西师大', '上海交大', '中国海洋', '国防科大', '西安交大'}
+    # school_name_and_link = get_name()
     # for each_name in school_name_and_link:
     #     if each_name in except_list:
     #         continue
@@ -268,8 +283,38 @@ if __name__ == '__main__':
 
     # mysqlWrapper.do_comm_insert()
     # mysqlWrapper.do_content_insert()
-    # info_dict = {'school_name': '上海交大', 'sheet_name': 'major_info', 'title': '123', 'content': '1223'}
-    sum_input_times = 1
-    for k, v in school_name_and_link.items():
-        get_content_list(k, v)
+    # sum_input_times = 1
+    # for k, v in school_name_and_link.items():
+    #     get_content_list(k, v)
 
+
+    school_name_and_link = get_name()
+    # 获取学校所有信息
+    # for k, v in school_name_and_link.items():
+    #     try:
+    #         ultra_dict = get_school_dict(k, v)
+    #         filename = (u"./" + k + u".json")
+    #         with open(filename, 'w', encoding='utf-8') as json_file:
+    #             json.dump(ultra_dict, json_file, ensure_ascii=False)
+    #     except Exception:
+    #         continue
+    #     print(k + '完成')
+
+    # 获取comm信息
+    # comm_dict = get_comm()
+    # print(comm_dict)
+    # try:
+    #     filename = (u"./comm.json")
+    #     with open(filename, 'w', encoding='utf-8') as json_file:
+    #         json.dump(comm_dict, json_file, ensure_ascii=False)
+    # except Exception:
+    #     print('Error in comm')
+
+    # 获取学校对应logo
+    logo_link = get_school_logo()
+    try:
+        filename = (u"./logo_link.json")
+        with open(filename, 'w', encoding='utf-8') as json_file:
+            json.dump(logo_link, json_file, ensure_ascii=False)
+    except Exception:
+        print('Error in get_school_logo')
