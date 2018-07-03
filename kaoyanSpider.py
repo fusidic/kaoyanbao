@@ -84,7 +84,30 @@ def get_name(baokao_page="http://www.kaoyan.com/baokao/"):
     return school_info
 
 
+def get_src_img(name,link):
+    html = requests.get(link, headers=hds[random.randint(0, len(hds) - 1)]).content
+    soup = BeautifulSoup(html, 'lxml')
+    school_top = soup.select('body > div.schoolTop')[0]
+    banner= school_top.find('div', class_='w1000 topbanner')
+    if banner.has_attr('style'):
+        background_img = banner['style']
+    else:
+        background_img = ''
+    college_tag = soup.select('body > div.schoolTop > div > div > a')[0]
+    college_img = college_tag.find('img')['src']
+    college_scene = soup.select('#focusImg > a:nth-of-type(1)')[0]
+    college_scene = college_scene.find('img')['src']
+    src_img_dict = {'school_name': name, 'background_img': background_img,
+                    'college_img': college_img, 'college_scene': college_scene}
+    return src_img_dict
+
+
 def get_school_logo(baokao_page="http://www.kaoyan.com/baokao/"):
+    """
+    Get logo of each college.
+    :param baokao_page: default
+    :return: logo_list
+    """
     logo_list = []
     html = requests.get(baokao_page, headers=hds[random.randint(0, len(hds) - 1)]).content
     soup = BeautifulSoup(html, 'lxml')
@@ -311,12 +334,15 @@ if __name__ == '__main__':
     #     print('Error in comm')
 
     # 获取学校对应logo
-    logo_link = get_school_logo()
+    # logo_link = get_school_logo()
     # try:
     #     filename = (u"./logo_link.json")
     #     with open(filename, 'w', encoding='utf-8') as json_file:
     #         json.dump(logo_link, json_file, ensure_ascii=False)
     # except Exception:
     #     print('Error in get_school_logo')
-    for logo_dict in logo_link:
-        mysqlWrapper.insert_site_to_school(logo_dict)
+    # for logo_dict in logo_link:
+    #     mysqlWrapper.insert_site_to_school(logo_dict)
+
+    for k, v in school_name_and_link.items():
+        mysqlWrapper.insert_img(get_src_img(k, v))
