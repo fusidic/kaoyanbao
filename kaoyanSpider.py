@@ -312,9 +312,11 @@ if __name__ == '__main__':
 
     # 获取学校对应logo
     logo_link = get_school_logo()
-    try:
-        filename = (u"./logo_link.json")
-        with open(filename, 'w', encoding='utf-8') as json_file:
-            json.dump(logo_link, json_file, ensure_ascii=False)
-    except Exception:
-        print('Error in get_school_logo')
+    # try:
+    #     filename = (u"./logo_link.json")
+    #     with open(filename, 'w', encoding='utf-8') as json_file:
+    #         json.dump(logo_link, json_file, ensure_ascii=False)
+    # except Exception:
+    #     print('Error in get_school_logo')
+    for logo_dict in logo_link:
+        mysqlWrapper.insert_site_to_school(logo_dict)

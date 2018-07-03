@@ -70,7 +70,19 @@ def do_school_insert(name, link):
     print(name, "成功插入")
 
 
-# def do_enrolment_insert():
+def insert_site_to_school(logo_dict):
+    logo_list = [logo_dict['school_name'], logo_dict['logo_link']]
+    db = pymysql.connect("localhost", "root", "root", "kaoyanbao")
+    cursor = db.cursor()
+    command = u"UPDATE SCHOOL SET imgsrc = '{0[1]}' WHERE name = '{0[0]}'".format(logo_list)
+    print(command)
+    try:
+        cursor.execute(command)
+        db.commit()
+    except Exception:
+        db.rollback()
+    db.close()
+    print(logo_list)
 
 
 def do_comm_insert():
@@ -148,5 +160,8 @@ def gen_content_insert_command(info_dict):
     command = (u"INSERT INTO {0[0]}(title, content, sId) VALUES "
                u"('{0[1]}', '{0[2]}', {0[3]})".format(t))
     return command
+
+
+
 
 
